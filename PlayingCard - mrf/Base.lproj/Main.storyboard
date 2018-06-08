@@ -21,7 +21,7 @@
                         <subviews>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yyW-5E-7BX" customClass="PlayingCardView" customModule="PlayingCard___mrf" customModuleProvider="target">
                                 <rect key="frame" x="16" y="136.66666666666669" width="343" height="548.66666666666652"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yyW-5E-7BX" secondAttribute="height" multiplier="5:8" id="C5D-0S-O8n"/>
                                     <constraint firstAttribute="width" priority="250" constant="800" id="HBR-HB-dPj"/>
