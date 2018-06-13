@@ -26,9 +26,15 @@
                                     <constraint firstAttribute="width" secondItem="yyW-5E-7BX" secondAttribute="height" multiplier="5:8" id="C5D-0S-O8n"/>
                                     <constraint firstAttribute="width" priority="250" constant="800" id="HBR-HB-dPj"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rank">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.86274509803921573" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yyW-5E-7BX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Itz-5Z-6IY"/>
                             <constraint firstItem="yyW-5E-7BX" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Ncb-Sy-3rp"/>
