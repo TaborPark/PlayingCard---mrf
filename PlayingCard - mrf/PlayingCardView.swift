@@ -109,6 +109,7 @@ class PlayingCardView: UIView
                 case 2:
                     pipString.draw(in: pipRect.leftHalf)
                     pipString.draw(in: pipRect.rightHalf)
+                    
                 default:
                     break
                 }
