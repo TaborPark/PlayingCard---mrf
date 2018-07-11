@@ -5,7 +5,6 @@
 //  Created by Mark Foege on 5/26/18.
 //  Copyright © 2018 Inobus. All rights reserved.
 //
-
 import UIKit
 
 @IBDesignable
@@ -18,7 +17,8 @@ class PlayingCardView: UIView
     @IBInspectable
     var isFaceUp: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
-    var faceCardScale: CGFloat = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay()}}
+    @IBInspectable
+    var faceCardScale: CGFloat = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay() } }
     
     @objc func adjustFaceCardScale(byHandlingGestureRecognizedBy recognizer: UIPinchGestureRecognizer) {
         switch recognizer.state {
@@ -29,6 +29,10 @@ class PlayingCardView: UIView
         }
     }
     
+    override var collisionBoundsType: UIDynamicItemCollisionBoundsType {
+        return .ellipse
+    }
+    
     private func centeredAttributedString(_ string: String, fontSize: CGFloat) -> NSAttributedString {
         var font = UIFont.preferredFont(forTextStyle: .body).withSize(fontSize)
         font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font)
@@ -36,6 +40,7 @@ class PlayingCardView: UIView
         paragraphStyle.alignment = .center
         return NSAttributedString(string: string, attributes: [.paragraphStyle:paragraphStyle,.font:font])
     }
+    
     private var cornerString: NSAttributedString {
         return centeredAttributedString(rankString+"\n"+suit, fontSize: cornerFontSize)
     }
@@ -109,7 +114,6 @@ class PlayingCardView: UIView
                 case 2:
                     pipString.draw(in: pipRect.leftHalf)
                     pipString.draw(in: pipRect.rightHalf)
-                    
                 default:
                     break
                 }
@@ -117,7 +121,7 @@ class PlayingCardView: UIView
             }
         }
     }
-
+    
     override func draw(_ rect: CGRect) {
         let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         roundedRect.addClip()
@@ -139,21 +143,21 @@ class PlayingCardView: UIView
 }
 
 extension PlayingCardView {
-        private struct SizeRatio {
-            static let cornerFontSizeToBoundsHeight: CGFloat = 0.085
-            static let cornerRadiusToBoundsHeight: CGFloat = 0.06
-            static let cornerOffsetToCornerRadius: CGFloat = 0.33
-            static let faceCardImageSizeToBoundsSize: CGFloat = 0.75
-        }
-        private var cornerRadius: CGFloat {
-            return bounds.size.height * SizeRatio.cornerRadiusToBoundsHeight
-        }
-        private var cornerOffset: CGFloat {
-            return cornerRadius * SizeRatio.cornerFontSizeToBoundsHeight
-        }
-        private var cornerFontSize: CGFloat {
-            return bounds.size.height * SizeRatio.cornerFontSizeToBoundsHeight
-        }
+    private struct SizeRatio {
+        static let cornerFontSizeToBoundsHeight: CGFloat = 0.085
+        static let cornerRadiusToBoundsHeight: CGFloat = 0.06
+        static let cornerOffsetToCornerRadius: CGFloat = 0.33
+        static let faceCardImageSizeToBoundsSize: CGFloat = 0.75
+    }
+    private var cornerRadius: CGFloat {
+        return bounds.size.height * SizeRatio.cornerRadiusToBoundsHeight
+    }
+    private var cornerOffset: CGFloat {
+        return cornerRadius * SizeRatio.cornerOffsetToCornerRadius
+    }
+    private var cornerFontSize: CGFloat {
+        return bounds.size.height * SizeRatio.cornerFontSizeToBoundsHeight
+    }
     private var rankString: String {
         switch rank {
         case 1: return "A"
@@ -170,8 +174,8 @@ extension CGRect {
     var leftHalf: CGRect {
         return CGRect(x: minX, y: minY, width: width/2, height: height)
     }
-    var rightHalf:CGRect {
-        return CGRect(x: minX, y: minY, width: width/2, height: height)
+    var rightHalf: CGRect {
+        return CGRect(x: midX, y: minY, width: width/2, height: height)
     }
     func inset(by size: CGSize) -> CGRect {
         return insetBy(dx: size.width, dy: size.height)
@@ -189,5 +193,11 @@ extension CGRect {
 extension CGPoint {
     func offsetBy(dx: CGFloat, dy: CGFloat) -> CGPoint {
         return CGPoint(x: x+dx, y: y+dy)
+    }
+}
+
+extension CGFloat {
+    var arc4random: CGFloat {
+        return self * (CGFloat(arc4random_uniform(UInt32.max))/CGFloat(UInt32.max))
     }
 }
